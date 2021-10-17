@@ -1,0 +1,210 @@
+$cell_width: 120px;
+$date_cell_height: 30px;
+$user_cell_height: 150px;
+$cells_cols_number: 9;
+
+html, body {
+    height: 100%;
+}
+
+ul, p {
+    margin: 0px;
+    padding: 0px;
+}
+
+.d-flex {
+    display: flex!important;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center!important;
+}
+
+.text-left {
+    text-align: left!important;
+}
+
+.m-0 {
+    margin: 0 0 0 0;
+}
+
+.main-wrapper {
+    display: none;
+    height: 100%;
+}
+
+.main {
+    height: inherit; 
+    min-width: 900px;
+}
+
+.scheduler { 
+    width: 100%;
+    padding: 0;
+
+    .dates-row {        
+        display: grid;
+        grid-template-rows: $date_cell_height;
+        grid-template-columns: repeat($cells_cols_number, 1fr);  
+        position: sticky;
+        top: 0px;
+        z-index: 30;
+        
+        > div {
+            overflow: hidden;
+            background-color: ivory;
+            border: 1px solid rgb(190, 182, 182);      
+            display: flex;
+            align-items: center;
+            justify-content: center;      
+        }
+    }
+
+    .user-row {
+        display: grid;
+        grid-template-columns: repeat($cells_cols_number, 1fr);          
+
+        > div {
+            border: 1px solid rgb(190, 182, 182);
+        }
+        
+        .user-cell {    
+            min-height: $user_cell_height;  
+            display: flex;
+            flex-direction: column;
+            justify-content: center;        
+            background-color: rgb(216, 231, 216);                
+            word-break: break-all; 
+            position: relative;
+            
+            .user-task {
+                position: relative;
+                text-align: center;
+                z-index: 2;
+
+                p {
+                    user-select: none;
+                    word-break: break-word;
+                }
+
+                p:hover::after{
+                    left: -150px;
+                    width: 100%;
+                    user-select: none;
+                    content: attr(data-title);
+                    position: absolute; 
+                    background: rgba(255,255,230,0.9);                
+                    word-break: normal;
+                    z-index: 5;    
+                    top: 200%;
+                    background: rgba(255,255,230,0.9);
+                    padding: 5px 10px;
+                    border: 1px solid #333;
+                }
+            }
+        }
+
+        .user-name {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #5cb85c;
+        }
+    }    
+}
+
+@media (max-width: 767px) {
+    .backlog {
+        display: none;
+    }
+}
+
+.backlog {
+    background-color: lightslategray;
+    width: 20%;
+
+    .search-button {
+        width: 20%;
+        overflow: hidden;      
+    }
+
+    .search-input {
+        width: 80%;
+    }
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    padding: 0px;   
+}
+
+.task {
+    background-color: rgb(161, 175, 189);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70px;
+    margin: 3px 6px;
+    padding: 15px;
+    cursor: pointer;
+    position: relative;
+    z-index: 20;
+
+    .task-message {
+        margin: 8px 0 0 0;
+    }
+}
+
+.control {
+    justify-content: space-between;
+
+    .btn {
+        cursor: pointer;
+        color: #fff;
+        background-color: #6993ff;
+        border-color: #6993ff;
+        outline: none!important;
+        vertical-align: middle;
+        text-transform: uppercase!important;
+        border-radius: .42rem;
+        user-select: none;
+        border: 1px solid transparent;
+        padding: 8px 10px;
+    }
+}
+
+.spinner-wrapper {
+    display: flex;
+    background-color: #137b85;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+
+    .spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid rgba(255,255,255,.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        -webkit-animation: spin 1s ease-in-out infinite;
+      }
+}  
+
+  @keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+
+
